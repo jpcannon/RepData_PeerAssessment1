@@ -71,7 +71,7 @@ ggplot(mean_stepsmean_intervalsteps, aes(x=interval, y=steps)) +
 
 ####The interval that had the maximum average steps is `r max_interval` with a daily average of `r format(max_steps,digits=2, nsmall=2, big.mark=",",small.mark=".")` steps.
 
-## Inputing missing values
+## Imputing missing values
 
 1.) The total number of missing rows can be easily determined by the getting the number of rows where the is.na is true in the steps column
 ```{r}
@@ -100,6 +100,14 @@ activityfilled <- activity %>%
                   which(is.na(steps)), first(Mean))) %>%
        select(-Mean)
 ```
+
+
+```{r}
+missing_rows <-format(nrow(activityfilled[is.na(activityfilled$steps),]),digits=2, nsmall=2, big.mark=",",small.mark=".")
+```
+
+#####After imputing the data, the resulting set shows `r missing_rows` rows with NA values in the steps column
+
 
 Here I will create an average steps per day sum on the filled data set, and plot it.
 

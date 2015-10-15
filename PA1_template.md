@@ -71,7 +71,7 @@ ggplot(mean_stepsmean_intervalsteps, aes(x=interval, y=steps)) +
 
 ####The interval that had the maximum average steps is 835 with a daily average of 206.17 steps.
 
-## Inputing missing values
+## Imputing missing values
 
 1.) The total number of missing rows can be easily determined by the getting the number of rows where the is.na is true in the steps column
 
@@ -103,6 +103,15 @@ activityfilled <- activity %>%
        select(-Mean)
 ```
 
+
+
+```r
+missing_rows <-format(nrow(activityfilled[is.na(activityfilled$steps),]),digits=2, nsmall=2, big.mark=",",small.mark=".")
+```
+
+#####After imputing the data, the resulting set shows 0 rows with NA values in the steps column
+
+
 Here I will create an average steps per day sum on the filled data set, and plot it.
 
 
@@ -115,7 +124,7 @@ ggplot(activityfilled_stepday, aes(x = date, y=steps)) +
              x = "Day", y = "Steps") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
 
 
 ####Now that we have datasets to compare, let's look closer.
@@ -162,7 +171,7 @@ For my evaluation, I will use the intervalgroup column created earlier (grouping
         labs(x="Interval", y="Number of steps") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
 
 #####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is 8820.36. However on the weekend the average steps taken per day is 10855.75. Also activity appears to occur later in the day and more continuous on weekends       
        

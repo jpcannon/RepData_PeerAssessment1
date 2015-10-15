@@ -121,8 +121,8 @@ ggplot(mean_stepsmean_intervalsteps, aes(x=interval, y=steps)) +
 <h4>The interval that had the maximum average steps is 835 with a daily average of 206.17 steps.</h4>
 </div>
 </div>
-<div id="inputing-missing-values" class="section level2">
-<h2>Inputing missing values</h2>
+<div id="imputing-missing-values" class="section level2">
+<h2>Imputing missing values</h2>
 <p>1.) The total number of missing rows can be easily determined by the getting the number of rows where the is.na is true in the steps column</p>
 <pre class="r"><code>missing_rows &lt;-format(nrow(activity[is.na(activity$steps),]),digits=2, nsmall=2, big.mark=&quot;,&quot;,small.mark=&quot;.&quot;)</code></pre>
 <div id="there-are-2304-rows-with-na-values-in-the-steps-column" class="section level5">
@@ -139,6 +139,10 @@ ggplot(mean_stepsmean_intervalsteps, aes(x=interval, y=steps)) +
                steps = replace(steps, 
                   which(is.na(steps)), first(Mean))) %&gt;%
        select(-Mean)</code></pre>
+<pre class="r"><code>missing_rows &lt;-format(nrow(activityfilled[is.na(activityfilled$steps),]),digits=2, nsmall=2, big.mark=&quot;,&quot;,small.mark=&quot;.&quot;)</code></pre>
+</div>
+<div id="after-imputing-the-data-the-resulting-set-shows-0-rows-with-na-values-in-the-steps-column" class="section level5">
+<h5>After imputing the data, the resulting set shows 0 rows with NA values in the steps column</h5>
 <p>Here I will create an average steps per day sum on the filled data set, and plot it.</p>
 <pre class="r"><code>activityfilled_stepday &lt;- aggregate(steps ~ date, activityfilled, sum)
 colnames(activityfilled_stepday) &lt;- c(&quot;date&quot;,&quot;steps&quot;)
