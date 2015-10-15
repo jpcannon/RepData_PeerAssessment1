@@ -42,11 +42,12 @@ activity$steps    <- as.numeric(activity$steps)
 activity_stepday <- aggregate(steps ~ date, activity, sum)
 colnames(activity_stepday) <- c("date","steps")
 
-mean_steps <- format(mean(activity_stepday$steps, na.rm=TRUE),digits=2, nsmall=2, big.mark=",",small.mark=".")
-median_steps <- format(median(activity_stepday$steps, na.rm=TRUE),digits=2, nsmall=2, big.mark=",",small.mark=".")
+mean_steps <- mean(activity_stepday$steps, na.rm=TRUE)
+median_steps <- median(activity_stepday$steps, na.rm=TRUE)
 ```
 #####The mean number of steps per day is 10,766.19
 #####The median number of steps per day is 10,765.00
+
 
 ######If we were to plot it out, it would looks like this
 
@@ -86,7 +87,7 @@ ggplot(mean_stepsmean_intervalsteps, aes(x=interval, y=steps)) +
 1.) The total number of missing rows can be easily determined by the getting the number of rows where the is.na is true in the steps column
 
 ```r
-missing_rows <-format(nrow(activity[is.na(activity$steps),]),digits=2, nsmall=2, big.mark=",",small.mark=".")
+missing_rows <- nrow(activity[is.na(activity$steps),])
 ```
 
 #####There are 2,304 rows with NA values in the steps column
@@ -141,7 +142,7 @@ activityfilled <- activity %>%
 
 
 ```r
-missing_rows <-format(nrow(activityfilled[is.na(activityfilled$steps),]),digits=2, nsmall=2, big.mark=",",small.mark=".")
+missing_rows <- nrow(activityfilled[is.na(activityfilled$steps),])
 ```
 #####After imputing the data, the resulting set shows 0 rows with NA values in the steps column
 
@@ -192,15 +193,16 @@ We calculate the mean and median of each.
 
 
 ```r
-activity_mean <- format(mean(activity_stepday$steps,na.rm = TRUE),digits=2, nsmall=2, big.mark=",",small.mark=".")
-activity_median <- format(median(activity_stepday$steps,na.rm = TRUE),digits=2, nsmall=2, big.mark=",",small.mark=".")
-activityfilled_mean <- format(mean(activityfilled_stepday$steps,na.rm = TRUE),digits=2, nsmall=2, big.mark=",",small.mark=".")
-activityfilled_median <- format(median(activityfilled_stepday$steps,na.rm = TRUE),digits=2, nsmall=2, big.mark=",",small.mark=".")
+activity_mean <- mean(activity_stepday$steps,na.rm = TRUE)
+activity_median <- median(activity_stepday$steps,na.rm = TRUE)
+activityfilled_mean <- mean(activityfilled_stepday$steps,na.rm = TRUE)
+activityfilled_median <- median(activityfilled_stepday$steps,na.rm = TRUE)
 ```
 
 
 ####The step mean of the original data set is 10,766.19, and the step mean of the filled data set is 10,766.19.
 ####The step median of the original data set is 10,765.00, and the step median of the filled data set is 10,766.19.
+
 As expected, the mean does not change, but the median is now equal to the mean.
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -216,14 +218,14 @@ As expected, the mean does not change, but the median is now equal to the mean.
                                      "weekday"))
  we_stepday <- activity %>%
                  filter(daytype=="weekend")
- we_avg <- format(mean(aggregate(we_stepday$steps,by=list(date=we_stepday$date), 
+ we_avg <- mean(aggregate(we_stepday$steps,by=list(date=we_stepday$date), 
                        sum, 
-                       na.rm=TRUE)$x,na.rm=T),digits=2, nsmall=2)
+                       na.rm=TRUE)$x,na.rm=T)
  wd_stepday <- activity %>%
                  filter(daytype=="weekday")
- wd_avg <- format(mean(aggregate(wd_stepday$steps,by=list(date=wd_stepday$date), 
+ wd_avg <- mean(aggregate(wd_stepday$steps,by=list(date=wd_stepday$date), 
                        sum, 
-                       na.rm=TRUE)$x,na.rm=T),digits=2, nsmall=2)
+                       na.rm=TRUE)$x,na.rm=T)
 
  activity_stepday <- aggregate(steps~interval+daytype, activity, mean)
  ggplot(activity_stepday, aes(x=interval, y=steps)) + 
@@ -234,5 +236,5 @@ As expected, the mean does not change, but the median is now equal to the mean.
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
 
-#####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is 8820.36. However on the weekend the average steps taken per day is 10855.75. Also activity appears to occur later in the day and more continuous on weekends       
+#####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is 8,820.36. However on the weekend the average steps taken per day is 10,855.75. Also activity appears to occur later in the day and more continuous on weekends       
        
