@@ -4,7 +4,7 @@ author: "Joe Cannon"
 
 output: 
   html_document:
-   keep_md: true
+   keep_md: yes
 
 #Use this output to create PDF
 # You will need a TeX/LaTeX system. I installed MikTex. It worked well for me.

@@ -1,5 +1,18 @@
-# Reproducible Research: Peer Assessment 1
-Joe Cannon  
+---
+title: "Reproducible Research: Peer Assessment 1"
+author: "Joe Cannon"
+
+output: 
+  html_document:
+   keep_md: yes
+
+#Use this output to create PDF
+# You will need a TeX/LaTeX system. I installed MikTex. It worked well for me.
+#output: 
+#   pdf_document: 
+#    toc: true
+#    toc_depth: 2
+---
 
 
 
@@ -59,7 +72,7 @@ ggplot(activity_stepday, aes(x = date, y=steps)) +
              x = "Day", y = "Steps") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
 ## What is the average daily activity pattern?
 1.) Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
@@ -79,7 +92,7 @@ ggplot(mean_stepsmean_intervalsteps, aes(x=interval, y=steps)) +
         labs(title="Average Daily Step Pattern", x="interval", y="Number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
 
 ####The interval that had the maximum average steps is 835 with a daily average of 206.17 steps.
 
@@ -185,7 +198,7 @@ ggplot(activityfilled_stepday, aes(x = date, y=steps)) +
              x = "Day", y = "Steps") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
 
 ####Now that we have datasets to compare, let's look closer.
 
@@ -236,7 +249,7 @@ As expected, the mean does not change, but the median is now equal to the mean.
         labs(x="Interval", y="Number Of Steps") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
+![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png) 
 
 ####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is 8,820.36. However on the weekend the average steps taken per day is 10,855.75. Also activity appears to occur later in the day and more continuous on weekends       
        
