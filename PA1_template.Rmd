@@ -1,9 +1,17 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
 author: "Joe Cannon"
+
 output: 
   html_document:
-    keep_md: true
+   keep_md: true
+
+#Use this output to create PDF
+# You will need a TeX/LaTeX system. I installed MikTex. It worked well for me.
+#output: 
+#   pdf_document: 
+#    toc: true
+#    toc_depth: 2
 ---
 
 
@@ -21,10 +29,11 @@ The data will be read directly from the zip file. There is no need to unzip the 
 
 ```{r}
 
-activity <- read.table(unz("activity.zip","activity.csv"),header = T,quote="\"", sep=",",na.strings = NA)
+activity <- read.table(unz("activity.zip","activity.csv"),
+                       header = T,quote="\"", sep=",",na.strings = NA)
 ```
 
-We polish the data for usibility
+We change the column types for usibility
 ```{r}
 
 activity$date     <- as.Date(activity$date, format = "%Y-%m-%d ")
@@ -154,8 +163,10 @@ We calculate the mean and median of each.
 ```{r}
 activity_mean <- mean(activity_stepday$steps,na.rm = TRUE)
 activity_median <- median(activity_stepday$steps,na.rm = TRUE)
-activityfilled_mean <- mean(activityfilled_stepday$steps,na.rm = TRUE)
-activityfilled_median <- median(activityfilled_stepday$steps,na.rm = TRUE)
+
+# we don't need the na.rm, because we already replaced them in this data set.
+activityfilled_mean <- mean(activityfilled_stepday$steps)
+activityfilled_median <- median(activityfilled_stepday$steps)
 ```
 
 
@@ -194,5 +205,5 @@ As expected, the mean does not change, but the median is now equal to the mean.
  
 ```       
 
-#####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is `r format(wd_avg,digits=2, nsmall=2, big.mark=",",small.mark=".")`. However on the weekend the average steps taken per day is `r format(we_avg,digits=2, nsmall=2, big.mark=",",small.mark=".")`. Also activity appears to occur later in the day and more continuous on weekends       
+####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is `r format(wd_avg,digits=2, nsmall=2, big.mark=",",small.mark=".")`. However on the weekend the average steps taken per day is `r format(we_avg,digits=2, nsmall=2, big.mark=",",small.mark=".")`. Also activity appears to occur later in the day and more continuous on weekends       
        

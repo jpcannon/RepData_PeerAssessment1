@@ -17,10 +17,11 @@ The data will be read directly from the zip file. There is no need to unzip the 
 
 
 ```r
-activity <- read.table(unz("activity.zip","activity.csv"),header = T,quote="\"", sep=",",na.strings = NA)
+activity <- read.table(unz("activity.zip","activity.csv"),
+                       header = T,quote="\"", sep=",",na.strings = NA)
 ```
 
-We polish the data for usibility
+We change the column types for usibility
 
 ```r
 activity$date     <- as.Date(activity$date, format = "%Y-%m-%d ")
@@ -154,10 +155,9 @@ head(activityfilled,10)
 
 ```
 ## Source: local data frame [10 x 3]
-## Groups: interval [10]
+## Groups: interval
 ## 
 ##        steps       date interval
-##        (dbl)     (date)    (int)
 ## 1  1.7169811 2012-10-01        0
 ## 2  0.3396226 2012-10-01        5
 ## 3  0.1320755 2012-10-01       10
@@ -195,8 +195,10 @@ We calculate the mean and median of each.
 ```r
 activity_mean <- mean(activity_stepday$steps,na.rm = TRUE)
 activity_median <- median(activity_stepday$steps,na.rm = TRUE)
-activityfilled_mean <- mean(activityfilled_stepday$steps,na.rm = TRUE)
-activityfilled_median <- median(activityfilled_stepday$steps,na.rm = TRUE)
+
+# we don't need the na.rm, because we already replaced them in this data set.
+activityfilled_mean <- mean(activityfilled_stepday$steps)
+activityfilled_median <- median(activityfilled_stepday$steps)
 ```
 
 
@@ -236,5 +238,5 @@ As expected, the mean does not change, but the median is now equal to the mean.
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
 
-#####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is 8,820.36. However on the weekend the average steps taken per day is 10,855.75. Also activity appears to occur later in the day and more continuous on weekends       
+####Yes. It appears that there is a there is fewer steps per day on the weekday. On the weekday the average steps taken per day is 8,820.36. However on the weekend the average steps taken per day is 10,855.75. Also activity appears to occur later in the day and more continuous on weekends       
        
